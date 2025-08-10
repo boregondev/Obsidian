@@ -1,7 +1,5 @@
 # Obsidian UI Library
 
-![Example Image](assets/Example.png?raw=true)
-
 ## Table of Contents
 
 - [Getting Started](#getting-started)

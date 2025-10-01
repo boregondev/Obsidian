@@ -142,7 +142,7 @@ do
 
         local AssetData = ObsidianImageManager.Assets[AssetName]
         if AssetData.Id then
-            return AssetData.Id
+            return nil
         end
 
         local AssetID = string.format("rbxassetid://%s", AssetData.RobloxId)
@@ -156,7 +156,7 @@ do
         end
 
         AssetData.Id = AssetID
-        return AssetID
+        return nil
     end
 
     function ObsidianImageManager.DownloadAsset(AssetPath: string)
@@ -175,7 +175,6 @@ do
     end
 
     for _, Data in ObsidianImageManager.Assets do
-        ObsidianImageManager.DownloadAsset(Data.Path)
     end
 end
 
@@ -1569,12 +1568,12 @@ function Library:AddContextMenu(
             BackgroundColor3 = "BackgroundColor",
             BorderColor3 = "OutlineColor",
             BorderSizePixel = 1,
-            BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png",
+            BottomImage = "",
             CanvasSize = UDim2.fromOffset(0, 0),
             ScrollBarImageColor3 = "OutlineColor",
             ScrollBarThickness = List == 2 and 2 or 0,
             Size = typeof(Size) == "function" and Size() or Size,
-            TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png",
+            TopImage = "",
             Visible = false,
             ZIndex = 10,
             Parent = ScreenGui,
@@ -1929,7 +1928,7 @@ do
             })
 
             local CheckImage = New("ImageLabel", {
-                Image = CheckIcon and CheckIcon.Url or "",
+                Image = "",
                 ImageColor3 = "FontColor",
                 ImageRectOffset = CheckIcon and CheckIcon.ImageRectOffset or Vector2.zero,
                 ImageRectSize = CheckIcon and CheckIcon.ImageRectSize or Vector2.zero,
@@ -2265,7 +2264,7 @@ do
         })
 
         local HolderTransparency = New("ImageLabel", {
-            Image = ObsidianImageManager.GetAsset("TransparencyTexture"),
+            Image = "",
             ImageTransparency = (1 - ColorPicker.Transparency),
             ScaleType = Enum.ScaleType.Tile,
             Size = UDim2.fromScale(1, 1),
@@ -2318,7 +2317,7 @@ do
         --// Sat Map
         local SatVipMap = New("ImageButton", {
             BackgroundColor3 = ColorPicker.Value,
-            Image = ObsidianImageManager.GetAsset("SaturationMap"),
+            Image = "",
             Size = UDim2.fromOffset(200, 200),
             Parent = ColorHolder,
         })
@@ -2364,7 +2363,7 @@ do
         local TransparencySelector, TransparencyColor, TransparencyCursor
         if Info.Transparency then
             TransparencySelector = New("ImageButton", {
-                Image = ObsidianImageManager.GetAsset("TransparencyTexture"),
+                Image = "",
                 ScaleType = Enum.ScaleType.Tile,
                 Size = UDim2.fromOffset(16, 200),
                 TileSize = UDim2.fromOffset(8, 8),
@@ -3142,7 +3141,7 @@ do
         })
 
         local CheckImage = New("ImageLabel", {
-            Image = CheckIcon and CheckIcon.Url or "",
+            Image = "",
             ImageColor3 = "FontColor",
             ImageRectOffset = CheckIcon and CheckIcon.ImageRectOffset or Vector2.zero,
             ImageRectSize = CheckIcon and CheckIcon.ImageRectSize or Vector2.zero,
@@ -3981,7 +3980,7 @@ do
 
         local ArrowImage = New("ImageLabel", {
             AnchorPoint = Vector2.new(1, 0.5),
-            Image = ArrowIcon and ArrowIcon.Url or "",
+            Image = "",
             ImageColor3 = "FontColor",
             ImageRectOffset = ArrowIcon and ArrowIcon.ImageRectOffset or Vector2.zero,
             ImageRectSize = ArrowIcon and ArrowIcon.ImageRectSize or Vector2.zero,
@@ -4621,7 +4620,7 @@ do
         local Container = Groupbox.Container
 
         local Image = {
-            Image = Info.Image,
+            Image = "",
             Color = Info.Color,
             RectOffset = Info.RectOffset,
             RectSize = Info.RectSize,
@@ -4661,7 +4660,7 @@ do
         local ImageProperties = {
             BackgroundTransparency = 1,
             Size = UDim2.fromScale(1, 1),
-            Image = Image.Image,
+            Image = "",
             ImageTransparency = Image.Transparency,
             ImageColor3 = Image.Color,
             ImageRectOffset = Image.RectOffset,
@@ -4673,7 +4672,7 @@ do
         local Icon = Library:GetCustomIcon(ImageProperties.Image)
         assert(Icon, "Image must be a valid Roblox asset or a valid URL or a valid lucide icon.")
 
-        ImageProperties.Image = Icon.Url
+        ImageProperties.Image = ""
         ImageProperties.ImageRectOffset = Icon.ImageRectOffset
         ImageProperties.ImageRectSize = Icon.ImageRectSize
 
@@ -4693,11 +4692,11 @@ do
             local Icon = Library:GetCustomIcon(NewImage)
             assert(Icon, "Image must be a valid Roblox asset or a valid URL or a valid lucide icon.")
 
-            NewImage = Icon.Url
+            NewImage = ""
             Image.RectOffset = Icon.ImageRectOffset
             Image.RectSize = Icon.ImageRectSize
 
-            ImageLabel.Image = NewImage
+            ImageLabel.Image = ""
             Image.Image = NewImage
         end
 
@@ -5326,7 +5325,7 @@ function Library:CreateWindow(WindowInfo)
 
         if WindowInfo.BackgroundImage then
             New("ImageLabel", {
-                Image = WindowInfo.BackgroundImage,
+                Image = "",
                 Position = UDim2.fromScale(0, 0),
                 Size = UDim2.fromScale(1, 1),
                 ScaleType = Enum.ScaleType.Stretch,
@@ -5365,7 +5364,7 @@ function Library:CreateWindow(WindowInfo)
 
         if WindowInfo.Icon then
             New("ImageLabel", {
-                Image = if tonumber(WindowInfo.Icon) then string.format("rbxassetid://%d", WindowInfo.Icon) else WindowInfo.Icon,
+                Image = "",
                 Size = WindowInfo.IconSize,
                 Parent = TitleHolder,
             })
@@ -5473,7 +5472,7 @@ function Library:CreateWindow(WindowInfo)
         local SearchIcon = Library:GetIcon("search")
         if SearchIcon then
             New("ImageLabel", {
-                Image = SearchIcon.Url,
+                Image = "",
                 ImageColor3 = "FontColor",
                 ImageRectOffset = SearchIcon.ImageRectOffset,
                 ImageRectSize = SearchIcon.ImageRectSize,
@@ -5488,7 +5487,7 @@ function Library:CreateWindow(WindowInfo)
         if MoveIcon then
             New("ImageLabel", {
                 AnchorPoint = Vector2.new(1, 0.5),
-                Image = MoveIcon.Url,
+                Image = "",
                 ImageColor3 = "OutlineColor",
                 ImageRectOffset = MoveIcon.ImageRectOffset,
                 ImageRectSize = MoveIcon.ImageRectSize,
@@ -5552,7 +5551,7 @@ function Library:CreateWindow(WindowInfo)
         end
 
         New("ImageLabel", {
-            Image = ResizeIcon and ResizeIcon.Url or "",
+            Image = "",
             ImageColor3 = "FontColor",
             ImageRectOffset = ResizeIcon and ResizeIcon.ImageRectOffset or Vector2.zero,
             ImageRectSize = ResizeIcon and ResizeIcon.ImageRectSize or Vector2.zero,
@@ -5662,7 +5661,7 @@ function Library:CreateWindow(WindowInfo)
 
             if Icon then
                 TabIcon = New("ImageLabel", {
-                    Image = Icon.Url,
+                    Image = "",
                     ImageColor3 = Icon.Custom and "White" or "AccentColor",
                     ImageRectOffset = Icon.ImageRectOffset,
                     ImageRectSize = Icon.ImageRectSize,
@@ -5944,7 +5943,7 @@ function Library:CreateWindow(WindowInfo)
                 local BoxIcon = Library:GetCustomIcon(Info.IconName)
                 if BoxIcon then
                     New("ImageLabel", {
-                        Image = BoxIcon.Url,
+                        Image = "",
                         ImageColor3 = BoxIcon.Custom and "White" or "AccentColor",
                         ImageRectOffset = BoxIcon.ImageRectOffset,
                         ImageRectSize = BoxIcon.ImageRectSize,
@@ -6308,7 +6307,7 @@ function Library:CreateWindow(WindowInfo)
 
             if KeyIcon then
                 TabIcon = New("ImageLabel", {
-                    Image = KeyIcon.Url,
+                    Image = "",
                     ImageColor3 = "AccentColor",
                     ImageRectOffset = KeyIcon.ImageRectOffset,
                     ImageRectSize = KeyIcon.ImageRectSize,
